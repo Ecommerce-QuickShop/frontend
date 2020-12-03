@@ -17,7 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserService } from './user.service';
 import {MatTableModule} from '@angular/material/table';
-
+import { HttpClientModule } from '@angular/common/http';  
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,8 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
