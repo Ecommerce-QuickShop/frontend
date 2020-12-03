@@ -1,1 +1,48 @@
-<p>register works!</p>
+<form [formGroup]="angForm" novalidate>  
+    <h2>Create An Account</h2>
+
+    <div class="form-group">  
+      <label for="Name"class="col-md-4"> Name</label>  
+      <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter First & Last Name" #Name />  
+    </div>  
+    <div *ngIf="angForm.controls['Name'].invalid && (angForm.controls['Name'].dirty || angForm.controls['Name'].touched)"  class="alert-danger">
+      <div *ngIf="angForm.controls['Name'].errors.required">  
+         Name is required.  
+      </div>  
+    </div>
+
+    <div class="form-group">  
+        <label class="col-md-4">Email</label>  
+        <input type="text" class="form-control"formControlName="Email" placeholder="Enter Email"#Email />  
+      </div>  
+      <div *ngIf="angForm.controls['Email'].invalid && (angForm.controls['Email'].dirty || angForm.controls['Email'].touched)" class="alert-danger">
+        <div *ngIf="angForm.controls['Email'].errors.required">  
+           Email is required.  
+        </div>  
+      </div>
+      
+        <div class="form-group">  
+      <label class="col-md-4">Username</label>  
+      <input type="text" class="form-control" formControlName="Username" placeholder="Enter Username"#Username />  
+    </div>  
+    <div *ngIf="angForm.controls['Username'].invalid && (angForm.controls['Username'].dirty || angForm.controls['Username'].touched)" class="alert-danger">
+      <div *ngIf="angForm.controls['Username'].errors.required">  
+         Username is required.  
+      </div>  
+    </div>
+    
+    <div class="form-group">  
+        <label class="col-md-4">Password</label>  
+        <input type="password" class="form-control" formControlName="CustomerPassword" placeholder="Enter Password" #Password  />  
+      </div>  
+      <div *ngIf="angForm.controls['Password'].invalid && (angForm.controls['Password'].dirty || angForm.controls['Password'].touched)"  class="alert-danger">
+        <div *ngIf="angForm.controls['Password'].errors.required">  
+           Password is required.  
+        </div>  
+      </div>
+      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <div class="form-group">  
+      <button type="submit" class="btn btn-outline-primary" >Register</button> 
+      </div>  
+  </form>  
+  
