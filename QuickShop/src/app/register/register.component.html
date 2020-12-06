@@ -1,50 +1,90 @@
 <div class="card">
   <div class="card-body">
-<form [formGroup]="angForm" novalidate>  
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">  
+
     <h2>Create An Account</h2>
 
     <div class="form-group">  
-      <label for="Name"class="col-md-4"> Name</label>  
-      <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter First & Last Name" #Name />  
+      <label for="first_name"class="col-md-4"> First Name</label>  
+      <input type="text" class="form-control" formControlName="first_name" placeholder="Enter First Name" #first_name />  
     </div>  
-    <div *ngIf="angForm.controls['Name'].invalid && (angForm.controls['Name'].dirty || angForm.controls['Name'].touched)"  class="alert-danger">
-      <div *ngIf="angForm.controls['Name'].errors.required">  
-         Name is required.  
+    <div *ngIf="registrationForm.controls['first_name'].invalid && (registrationForm.controls['first_name'].dirty || registrationForm.controls['first_name'].touched)"  class="alert-danger">
+      <div *ngIf="registrationForm.controls['first_name'].errors.required">  
+        First Name is required.  
+      </div>  
+    </div>
+
+    <div class="form-group">  
+      <label for="last_name"class="col-md-4"> Last Name</label>  
+      <input type="text" class="form-control" formControlName="last_name" placeholder="Enter Last Name" #last_name />  
+    </div>  
+    <div *ngIf="registrationForm.controls['last_name'].invalid && (registrationForm.controls['last_name'].dirty || registrationForm.controls['last_name'].touched)"  class="alert-danger">
+      <div *ngIf="registrationForm.controls['last_name'].errors.required">  
+        Last Name is required.  
       </div>  
     </div>
 
     <div class="form-group">  
         <label class="col-md-4">Email</label>  
-        <input type="text" class="form-control"formControlName="Email" placeholder="Enter Email"#Email />  
+        <input type="email" class="form-control" formControlName="email" placeholder="Enter Email"#email />  
       </div>  
-      <div *ngIf="angForm.controls['Email'].invalid && (angForm.controls['Email'].dirty || angForm.controls['Email'].touched)" class="alert-danger">
-        <div *ngIf="angForm.controls['Email'].errors.required">  
+      <div *ngIf="registrationForm.controls['email'].invalid && (registrationForm.controls['email'].dirty || registrationForm.controls['email'].touched)" class="alert-danger">
+        <div *ngIf="registrationForm.controls['email'].errors.required">  
            Email is required.  
+        </div>  
+      </div>
+
+      <div class="form-group">  
+        <label class="col-md-4">Phone Number</label>  
+        <input type="tel" class="form-control" formControlName="phone_number" placeholder="Enter Phone Number"#phone_number />  
+      </div>  
+      <div *ngIf="registrationForm.controls['phone_number'].invalid && (registrationForm.controls['phone_number'].dirty || registrationForm.controls['phone_number'].touched)" class="alert-danger">
+        <div *ngIf="registrationForm.controls['phone_number'].errors.required">  
+           Phone Number is required.  
         </div>  
       </div>
       
         <div class="form-group">  
       <label class="col-md-4">Username</label>  
-      <input type="text" class="form-control" formControlName="Username" placeholder="Enter Username"#Username />  
+      <input type="text" class="form-control" formControlName="username" placeholder="Enter Username"#username />  
     </div>  
-    <div *ngIf="angForm.controls['Username'].invalid && (angForm.controls['Username'].dirty || angForm.controls['Username'].touched)" class="alert-danger">
-      <div *ngIf="angForm.controls['Username'].errors.required">  
-         Username is required.  
+    <div *ngIf="registrationForm.controls['username'].invalid && (registrationForm.controls['username'].dirty || registrationForm.controls['username'].touched)" class="alert-danger">
+      <div *ngIf="registrationForm.controls['username'].errors.required">  
+          Username is required.  
       </div>  
     </div>
     
     <div class="form-group">  
         <label class="col-md-4">Password</label>  
-        <input type="password" class="form-control" formControlName="CustomerPassword" placeholder="Enter Password" #Password  />  
+        <input type="password" class="form-control" formControlName="password" placeholder="Enter Password" #password  />
+        <small>Password must be at least 8 characters</small>  
       </div>  
-      <div *ngIf="angForm.controls['Password'].invalid && (angForm.controls['Password'].dirty || angForm.controls['Password'].touched)"  class="alert-danger">
-        <div *ngIf="angForm.controls['Password'].errors.required">  
-           Password is required.  
+      <div *ngIf="registrationForm.controls['password'].invalid && (registrationForm.controls['password'].dirty || registrationForm.controls['password'].touched)"  class="alert-danger">
+        <div *ngIf="registrationForm.controls['password'].errors.required">  
+         Password is required.  
         </div>  
       </div>
+
+      <div class="form-group">
+        <label class="col-md-4">Role</label>   
+        <select class="custom-select" (change)="ChangeRole($event)" formControlName="role" #role>
+          <option value="">Select Role</option>
+          <option *ngFor="let role of Role" [ngValue]="role">{{role}}</option>
+        </select>
+        <div class="alert-danger" *ngIf="registrationForm.controls['role'].touched && registrationForm.controls['role'].errors?.required">
+          Please select role
+       </div>
+      </div>
+<div class="form-group">
+        <label class="col-md-4">Avatar Image</label>
+        <input type="file" class="form-control-file" formControlName="avatar_mine" #avatar_mine >
+      </div>
+     
+     
+      
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
     <div class="form-group">  
-      <button type="submit" class="btn btn-outline-primary" >Register</button> 
+      <button type="submit" class="btn btn-outline-primary" routerLink='/' [disabled]="registrationForm.pristine || registrationForm.invalid" (click)="addUser(first_name.value,last_name.value, email.value,phone_number.value,username.value,password.value,role.value,avatar_mine.value)">Register</button> 
       </div>  
   </form>  
   </div>

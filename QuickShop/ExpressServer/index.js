@@ -6,7 +6,7 @@ var cors = require('cors');
    var mysql = require('mysql');
    
     const port = process.env.PORT || 8080; 
-    const host='den1.mysql3.gear.host'; 
+    const host='localhost'; 
 
     app = express(); 
 
@@ -20,10 +20,10 @@ app.use(express.urlencoded({extended:false}));
 
 const mysqlConnection=mysql.createConnection({
 
-    host:'den1.mysql3.gear.host',
-    user:'quickshop',
-    password:'Zq1n9cro_?ap',
-    database:'QuickShop',
+    host:'localhost',
+    user:'root',
+    password:'tbDeveloper24',
+    database:'quickshop',
     insecureAuth:true
  
 
@@ -77,17 +77,18 @@ app.get('/products',(req,res)=>{
     // Create a product
        app.post('/admin/ProductInventory/AddProduct',(req,res)=>{
            var Product={
-                 product_id:req.body.product_id,
+            
                  product_name:req.body.product_name,
                  product_description:req.body.product_description,
                  product_category:req.body.product_category,
                  product_units_in_stock:req.body.product_units_in_stock,
                  product_price:req.body.product_price,
-                 product_image_mime:req.body.product_image_mime
+                 product_image_mine:req.body.product_image_mine,
 
            }
-           var CreateProduct=`INSERT INTO products (product_id, product_name, product_description, product_category, product_units_in_stock, product_price, product_image_mime ) VALUES
-            ('${NewProduct.product_id}','${Product.product_name}','${Product.product_description}','${Product.product_category}','${Product.product_units_in_stock}','${Product.product_price}','${Product.product_image_mime}')`;
+          
+           var CreateProduct=`INSERT INTO products (product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine) VALUES
+            ('${Product.product_name}','${Product.product_description}','${Product.product_category}','${Product.product_units_in_stock}','${Product.product_price}','${Product.product_image_mine}')`;
             mysqlConnection.query(CreateProduct,(err,result,fields)=>{
                 if(!err){
                
@@ -95,6 +96,7 @@ app.get('/products',(req,res)=>{
                 }
                 else{
                     res.status(400).json({msg: 'error with product creation'});
+                   
                 }
             });
 
@@ -102,18 +104,19 @@ app.get('/products',(req,res)=>{
        //Update Product
        app.put('/admin/ProductInventory/UpdateProduct/:id',(req,res)=>{
            var Product={
-            product_id:req.body.product_id,
+           
             product_name:req.body.product_name,
             product_description:req.body.product_description,
             product_category:req.body.product_category,
             product_units_in_stock:req.body.product_units_in_stock,
             product_price:req.body.product_price,
-            product_image_mime:req.body.product_image_mime
+            product_image_mine:req.body.product_image_mine,
            }
+
            Object.keys(result).forEach(function(key) {
             var row = result[key];
             if(row.product_id==req.params.id){
-           var UpdateProduct=`UPDATE products SET product_id='${Product.product_id}', product_name='${Product.product_name}', product_description='${Product.product_description}', product_category='${Product.product_category}', product_units_in_stock='${Product.product_units_in_stock}', product_price= '${Product.product_price}', product_image_mime='${Product.product_image_mime}'`;
+           var UpdateProduct=`UPDATE products SET product_name='${Product.product_name}', product_description='${Product.product_description}', product_category='${Product.product_category}', product_units_in_stock='${Product.product_units_in_stock}', product_price= '${Product.product_price}', product_image_mine='${Product.product_image_mine}'`;
            mysqlConnection.query(UpdateProduct,(err)=>{
             if(!err){
                
@@ -191,7 +194,7 @@ app.get('/UserProfile/:id',(req,res)=>{
     //Register User
     app.post('/register',(req,res)=>{
         var User={
-            user_id: req.body.user_id,
+        
             first_name:req.body.first_name,
             last_name:req.body.last_name,
             email:req.body.email,
@@ -200,10 +203,9 @@ app.get('/UserProfile/:id',(req,res)=>{
             password:req.body.password,
             role:req.body.role,
             avatar_mine:req.body.avatar_mine,
-            auth_token:req.bo.auth_token
-        }
-        var RegisterUser=`INSERT INTO user (user_id,first_name,last_name,email,phone_number,username,password,role,avatar_mine,auth_token) VALUES
-         ('${User.user_id}','${User.first_name}','${User.last_name}','${User.email}','${User.phone_number}','${User.username}','${User.password}','${User.role}','${User.avatar_mine}','${NewUser.auth_token}')`;
+            }
+        var RegisterUser=`INSERT INTO user (first_name,last_name,email,phone_number,username,password,role,avatar_mine) VALUES
+         ('${User.first_name}','${User.last_name}','${User.email}','${User.phone_number}','${User.username}','${User.password}','${User.role}','${User.avatar_mine}')`;
         mysqlConnection.query(RegisterUser,(err,result,fields)=>{
             if(!err){
                
@@ -219,8 +221,7 @@ app.get('/UserProfile/:id',(req,res)=>{
   app.put('/UserProfile/edit/:id',(req,res)=>{
 
     var User={
-        user_id: req.body.user_id,
-        first_name:req.body.first_name,
+         first_name:req.body.first_name,
         last_name:req.body.last_name,
         email:req.body.email,
         phone_number:req.body.phone_number,
@@ -228,12 +229,11 @@ app.get('/UserProfile/:id',(req,res)=>{
         password:req.body.password,
         role:req.body.role,
         avatar_mine:req.body.avatar_mine,
-        auth_token:req.bo.auth_token
     }
     Object.keys(result).forEach(function(key) {
      var row = result[key];
      if(row.user_id==req.params.id){
-    var UpdateUser=`UPDATE user SET user_id='${User.user_id}', first_name='${User.first_name}',last_name='${User.last_name}' email='${User.email}', phone_number='${User.phone_number}', username='${User.username}', password= '${User.password}', role='${User.role}',avatar_mine='${User.avatar_mine}',auth_token='${User.auth_token}'`;
+    var UpdateUser=`UPDATE user SET first_name='${User.first_name}',last_name='${User.last_name}' email='${User.email}', phone_number='${User.phone_number}', username='${User.username}', password= '${User.password}', role='${User.role}',avatar_mine='${User.avatar_mine}'`;
     mysqlConnection.query(UpdateUser,(err)=>{
      if(!err){
         

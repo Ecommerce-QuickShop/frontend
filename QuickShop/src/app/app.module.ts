@@ -15,19 +15,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { UserService } from './user.service';
+import { UserService } from './service/user.service';
 import {MatTableModule} from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';  
+import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ProductService } from './service/product.service';
+ 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     ContactComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    AddProductComponent
+   
   ],
   imports: [
-    BrowserModule,
+      BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -41,7 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
