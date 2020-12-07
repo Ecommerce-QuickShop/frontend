@@ -73,7 +73,7 @@
                     </div>  
                   </div>
                   <div class="form-group">  
-                    <button type="submit" class="btn btn-outline-primary" routerLink='/admin' [disabled]="productForm.pristine || productForm.invalid" (click)=" addProduct(product_name.value,product_description.value,product_category.value,product_units_in_stock.value,product_price.value,product_image_mine.value)">Submit</button> 
+                    <button type="submit" class="btn btn-outline-primary"  [disabled]="productForm.pristine || productForm.invalid" (click)=" addProduct(product_name.value,product_description.value,product_category.value,product_units_in_stock.value,product_price.value,product_image_mine.value)">Submit</button> 
                     </div> 
                     
         </form>

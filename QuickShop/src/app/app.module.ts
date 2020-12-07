@@ -21,6 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductService } from './service/product.service';
+import { ShowProductsComponent } from './show-products/show-products.component';
+import { ShowUsersComponent } from './show-users/show-users.component';
+import { ProductsComponent } from './products/products.component';
+
  
 
 
@@ -32,11 +36,15 @@ import { ProductService } from './service/product.service';
     ContactComponent,
     RegisterComponent,
     AdminComponent,
-    AddProductComponent
+    AddProductComponent,
+    ShowProductsComponent,
+    ShowUsersComponent,
+    ProductsComponent,
+    
    
   ],
   imports: [
-      BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

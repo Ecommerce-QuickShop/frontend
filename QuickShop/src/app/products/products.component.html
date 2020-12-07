@@ -1,0 +1,27 @@
+<table class="table table-hover">  
+    <thead>  
+    <tr>  
+        <td>Product Image</td>  
+        <td>Product Name</td>  
+        <td>Product Description</td>  
+        <td>Product Category</td>  
+        <td>Product Units in Stock</td>  
+        <td>Product Price</td>  
+        <td colspan="2">Actions</td>  
+    </tr>  
+    </thead>  
+    <tbody>  
+        <tr *ngFor="let product of products">  
+            <td>{{ product.product_image_mine }}</td>  
+            <td>{{ product.product_name }}</td>  
+            <td>{{ product.product_description }}</td> 
+            <td>{{ product.product_category }}</td>
+            <td>{{ product.product_units_in_stock }}</td>     
+            <td>{{ product.product_price }}</td>  
+
+            <td><a  class="btn btn-success">Add to Cart</a></td>  
+           
+        </tr>  
+    </tbody>  
+  </table>  
+

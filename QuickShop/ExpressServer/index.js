@@ -60,14 +60,10 @@ app.get('/products',(req,res)=>{
   app.get('/products/:id',(req,res)=>{
     var OneProductDetails=`SELECT * FROM products WHERE product_id='${req.params.id}'`;
     
-    mysqlConnection.query(OneProductDetails,(err,result,fields)=>{
+    mysqlConnection.query(OneProductDetails,(err,rows,fields)=>{
         if(!err){
            
-            Object.keys(result).forEach(function(key) {
-                var row = result[key];
-                res.send(row);
-               
-              });
+           res.send(rows)
         }
         else{
             res.status(400).json({msg: `No product with product_id ${req.params.id}`});
@@ -113,9 +109,7 @@ app.get('/products',(req,res)=>{
             product_image_mine:req.body.product_image_mine,
            }
 
-           Object.keys(result).forEach(function(key) {
-            var row = result[key];
-            if(row.product_id==req.params.id){
+          
            var UpdateProduct=`UPDATE products SET product_name='${Product.product_name}', product_description='${Product.product_description}', product_category='${Product.product_category}', product_units_in_stock='${Product.product_units_in_stock}', product_price= '${Product.product_price}', product_image_mine='${Product.product_image_mine}'`;
            mysqlConnection.query(UpdateProduct,(err)=>{
             if(!err){
@@ -126,20 +120,12 @@ app.get('/products',(req,res)=>{
                 res.status(400).json({msg: 'error with update'});
             }
         });
-    }
-    else{
-        res.status(400).json({msg: `No product with product_id ${req.params.id}`});
-    }
-   
-  });
-
-       });
+    });
+    
 
 //Delete Product
 app.delete('/admin/UserManagement/DeleteProduct/:id',(req,res)=>{
-Object.keys(result).forEach(function(key) {
-    var row = result[key];
-    if(row.user_id==req.params.id){
+
         var deletStatement=`DELETE FROM products WHERE product_id='${req.params.id}'`;
         mysqlConnection.query(deletStatement,(err)=>{
             if(!err){
@@ -151,18 +137,13 @@ Object.keys(result).forEach(function(key) {
             }
         });
 
-    }
-    else{
-        res.status(400).json({msg: `No product with product_id ${req.params.id}`});
-    }
-   
-  });
-});
+    });
+    
 
 //User CRUD
 
 //Get all Users
-app.get('/admin/UserManagement/user',(req,res)=>{
+app.get('/admin/UserManagement/users',(req,res)=>{
     var selectStatement= 'SELECT * FROM user';
     mysqlConnection.query(selectStatement,(err,rows)=>{
         if(!err){
@@ -177,14 +158,13 @@ app.get('/admin/UserManagement/user',(req,res)=>{
 app.get('/UserProfile/:id',(req,res)=>{
     var OneProductDetails=`SELECT * FROM user WHERE user_id='${req.params.id}'`;
     
-    mysqlConnection.query(OneProductDetails,(err,result,fields)=>{
+    mysqlConnection.query(OneProductDetails,(err,rows,fields)=>{
         if(!err){
            
-            Object.keys(result).forEach(function(key) {
-                var row = result[key];
-                res.send(row);
+            res.send(rows);
+            
                
-              });
+            
         }
         else{
             res.status(400).json({msg: `No user with user_id ${req.params.id}`});
@@ -230,9 +210,7 @@ app.get('/UserProfile/:id',(req,res)=>{
         role:req.body.role,
         avatar_mine:req.body.avatar_mine,
     }
-    Object.keys(result).forEach(function(key) {
-     var row = result[key];
-     if(row.user_id==req.params.id){
+     
     var UpdateUser=`UPDATE user SET first_name='${User.first_name}',last_name='${User.last_name}' email='${User.email}', phone_number='${User.phone_number}', username='${User.username}', password= '${User.password}', role='${User.role}',avatar_mine='${User.avatar_mine}'`;
     mysqlConnection.query(UpdateUser,(err)=>{
      if(!err){
@@ -243,19 +221,11 @@ app.get('/UserProfile/:id',(req,res)=>{
          res.status(400).json({msg: 'error with update'});
      }
  });
-}
-else{
- res.status(400).json({msg: `No product with product_id ${req.params.id}`});
-}
-
 });
 
-});
 //Delete User
 app.delete('/admin/UserManagement/DeleteUser/:id',(req,res)=>{
-    Object.keys(result).forEach(function(key) {
-        var row = result[key];
-        if(row.user_id==req.params.id){
+        
             var deletStatement=`DELETE FROM user WHERE user_id='${req.params.id}'`;
             mysqlConnection.query(deletStatement,(err)=>{
                 if(!err){
@@ -267,13 +237,10 @@ app.delete('/admin/UserManagement/DeleteUser/:id',(req,res)=>{
                 }
             });
     
-        }
-        else{
-            res.status(400).json({msg: `No user with user_id ${req.params.id}`});
-        }
+        });
        
-      });
-    });
+       
+     
 
 app.listen(port, host,()=>{  
     console.log('Express server is listening on port ' + port);  

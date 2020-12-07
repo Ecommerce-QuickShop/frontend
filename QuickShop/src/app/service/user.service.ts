@@ -26,6 +26,13 @@ export class UserService {
     this.http.post(`${this.uri}/register`,(obj))
     .subscribe(res=>console.log('Done'));
   }
+  getUsers(){
+    return this.http.get(`${this.uri}/admin/UserManagement/users`);
+  }
+deleteUser(id){
+  return this.http.delete(`${this.uri}/admin/UserManagement/DeleteUser/${id}`);
+}
+  
 
   
 }

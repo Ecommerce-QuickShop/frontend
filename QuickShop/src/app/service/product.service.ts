@@ -23,5 +23,12 @@ export class ProductService {
 
     this.http.post(`${this.uri}/admin/ProductInventory/AddProduct`,(obj))
     .subscribe(res=>console.log('Done'));
-}
+  }
+    getProducts(){
+      return this.http.get(`${this.uri}/products`);
+    }
+    deleteProduct(id){
+      return this.http.delete(`${this.uri}/admin/UserManagement/DeleteProduct/${id}`);
+    }
+
 }

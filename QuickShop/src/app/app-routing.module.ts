@@ -6,6 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component'; 
 import { AdminComponent } from './admin/admin.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ShowProductsComponent } from './show-products/show-products.component';
+import { ShowUsersComponent } from './show-users/show-users.component';
+import { ProductsComponent } from './products/products.component';
+
 
 
 const routes: Routes = [
@@ -16,6 +20,10 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'admin',component:AdminComponent},
   {path:'AddProduct',component:AddProductComponent},
+  {path: 'ShowProducts',component:ShowProductsComponent},
+  {path:'ShowUsers',component:ShowUsersComponent},
+  {path:'user/products',component:ProductsComponent}
+ 
 ];
 
 @NgModule({
