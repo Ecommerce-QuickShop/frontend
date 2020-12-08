@@ -24,6 +24,7 @@ import { ProductService } from './service/product.service';
 import { ShowProductsComponent } from './show-products/show-products.component';
 import { ShowUsersComponent } from './show-users/show-users.component';
 import { ProductsComponent } from './products/products.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
  
 
@@ -40,6 +41,7 @@ import { ProductsComponent } from './products/products.component';
     ShowProductsComponent,
     ShowUsersComponent,
     ProductsComponent,
+    EditProductComponent,
     
    
   ],

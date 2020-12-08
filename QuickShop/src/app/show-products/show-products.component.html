@@ -1,4 +1,5 @@
-<table class="table table-hover">  
+<table class="table table-hover"> 
+   
     <thead>  
     <tr>  
         <td>Product Image</td>  
@@ -12,13 +13,13 @@
     </thead>  
     <tbody>  
         <tr *ngFor="let product of products">  
-            <td><img src="{{ product.product_image_mine }}"/></td>  
+            <td><img src="{{ product.product_image_mine }}" style="height: 50%; width: 50%;"/></td>  
             <td>{{ product.product_name }}</td>  
             <td>{{ product.product_description }}</td> 
             <td>{{ product.product_category }}</td>
             <td>{{ product.product_units_in_stock }}</td>     
             <td>{{ product.product_price }}</td>  
-            <td><a  class="btn btn-warning">Edit</a></td>  
+            <td><a [routerLink]="['/editProduct',product.product_id]" class="btn btn-warning">Edit</a></td>  
             <td><a (click)="deleteProduct(product.product_id)"class="btn btn-danger">Delete</a></td>  
         </tr>  
     </tbody>  

@@ -21,6 +21,8 @@ export class ProductService {
   
     console.log(obj);
 
+    
+
     this.http.post(`${this.uri}/admin/ProductInventory/AddProduct`,(obj))
     .subscribe(res=>console.log('Done'));
   }
@@ -31,4 +33,22 @@ export class ProductService {
       return this.http.delete(`${this.uri}/admin/UserManagement/DeleteProduct/${id}`);
     }
 
-}
+    UpdateProduct(product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine,id){
+      const obj={
+       
+        product_name,
+        product_description,
+        product_category,
+        product_units_in_stock,
+        product_price,
+        product_image_mine,
+      };
+    
+    
+    console.log(obj);
+    this.http.put(`${this.uri}/admin/ProductInventory/UpdateProduct/${id}`,(obj))
+    }
+    editProduct(id){
+      return this.http.put(`${this.uri}/admin/ProductInventory/UpdateProduct/${id}`,this.UpdateProduct);
+    }
+  }
