@@ -2,25 +2,25 @@
    
     <thead>  
     <tr>  
-        <td>Product Image</td>  
-        <td>Product Name</td>  
-        <td>Product Description</td>  
-        <td>Product Category</td>  
-        <td>Product Units in Stock</td>  
-        <td>Product Price</td>  
-        <td colspan="2">Actions</td>  
+        <td><strong> Image</strong></td>  
+        <td><strong>Name</strong></td>  
+        <td><strong>Description</strong></td>  
+        <td><strong>Category</strong></td>  
+        <td><strong>Units in Stock</strong></td>  
+        <td><strong>Price</strong></td>  
+        <td colspan="2"></td>  
     </tr>  
     </thead>  
     <tbody>  
         <tr *ngFor="let product of products">  
-            <td><img src="{{ product.product_image_mine }}" style="height: 50%; width: 50%;"/></td>  
+            <td><img src="{{ product.product_image_mine }}" style="height: 50%; width: 50%;"/> </td>  
             <td>{{ product.product_name }}</td>  
             <td>{{ product.product_description }}</td> 
             <td>{{ product.product_category }}</td>
             <td>{{ product.product_units_in_stock }}</td>     
             <td>{{ product.product_price }}</td>  
-            <td><a [routerLink]="['/editProduct',product.product_id]" class="btn btn-warning">Edit</a></td>  
-            <td><a (click)="deleteProduct(product.product_id)"class="btn btn-danger">Delete</a></td>  
+            <td><a [routerLink]="['/editProduct',product.product_id]" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>  
+            <td><a (click)="deleteProduct(product.product_id)" routerLink='/ShowProducts'class="btn btn-danger"> <i class="fas fa-times"></i></a></td>  
         </tr>  
     </tbody>  
   </table>  

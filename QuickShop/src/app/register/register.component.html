@@ -38,6 +38,7 @@
         <label class="col-md-4">Phone Number</label>  
         <input type="tel" class="form-control" formControlName="phone_number" placeholder="Enter Phone Number"#phone_number />  
       </div>  
+      <div class="invalid-feedback">can't be blank, is not a number</div>
       <div *ngIf="registrationForm.controls['phone_number'].invalid && (registrationForm.controls['phone_number'].dirty || registrationForm.controls['phone_number'].touched)" class="alert-danger">
         <div *ngIf="registrationForm.controls['phone_number'].errors.required">  
            Phone Number is required.  
@@ -45,8 +46,8 @@
       </div>
       
         <div class="form-group">  
-      <label class="col-md-4">Username</label>  
-      <input type="text" class="form-control" formControlName="username" placeholder="Enter Username"#username />  
+      <label class="col-md-4">Username </label>  
+      <input type="text" class="form-control" formControlName="username" placeholder="Username"#username  />  
     </div>  
     <div *ngIf="registrationForm.controls['username'].invalid && (registrationForm.controls['username'].dirty || registrationForm.controls['username'].touched)" class="alert-danger">
       <div *ngIf="registrationForm.controls['username'].errors.required">  
@@ -75,10 +76,7 @@
           Please select role
        </div>
       </div>
-<div class="form-group">
-        <label class="col-md-4">Avatar Image</label>
-        <input type="file" class="form-control-file" formControlName="avatar_mine" #avatar_mine >
-      </div>
+            <input type="hidden"  value="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png" #avatar_mine/>
      
      
       

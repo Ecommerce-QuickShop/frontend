@@ -14,11 +14,12 @@ export class ShowProductsComponent implements OnInit {
   constructor(private ps:ProductService) { }
 
   ngOnInit(): void {
+    
 
     this.ps.getProducts().subscribe((data:Product[])=>{this.products=data});
   }
   deleteProduct(id){
     this.ps.deleteProduct(id).subscribe(res=>{this.products.splice(id,1)});
   }
-  
+ 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms'; 
 import {UserService} from '../service/user.service'
- 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,6 +10,7 @@ import {UserService} from '../service/user.service'
 export class RegisterComponent{
 
   isSubmitted=false;
+ 
 
   Role: any =['User','Admin']
 
@@ -49,7 +50,8 @@ export class RegisterComponent{
     
 
   }
- 
+  
+  
 
 
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms'; 
 import { ProductService } from '../service/product.service';
 
+
+
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,8 +13,8 @@ import { ProductService } from '../service/product.service';
 export class AddProductComponent {
 
   isSubmitted=false;
-
-  Category: any=['Chair','Bed','Sofa']
+  url:string | ArrayBuffer
+  Category:any=['Chair',  'Bed', 'Sofa']
 
   constructor(private fb: FormBuilder, private ps:ProductService) { }
 
@@ -45,6 +48,21 @@ get ProductCategory(){
     alert('Product Added');
   
 
+}
+onSelectFile(event) {
+  if (event.target.files && event.target.files[0]) {
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); // read file as data url
+    console.log(this.productForm.get('product_image_mine').value);
+
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      this.url = event.target.result;
+      
+    }
+     
+  }
+  
 }
 
 }

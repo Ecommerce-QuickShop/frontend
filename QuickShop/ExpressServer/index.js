@@ -173,7 +173,8 @@ app.get('/UserProfile/:id',(req,res)=>{
     });
     //Register User
     app.post('/register',(req,res)=>{
-        var User={
+
+           var User={
         
             first_name:req.body.first_name,
             last_name:req.body.last_name,
@@ -182,7 +183,7 @@ app.get('/UserProfile/:id',(req,res)=>{
             username:req.body.username,
             password:req.body.password,
             role:req.body.role,
-            avatar_mine:req.body.avatar_mine,
+            avatar_mine:req.body.avatar_mine
             }
         var RegisterUser=`INSERT INTO user (first_name,last_name,email,phone_number,username,password,role,avatar_mine) VALUES
          ('${User.first_name}','${User.last_name}','${User.email}','${User.phone_number}','${User.username}','${User.password}','${User.role}','${User.avatar_mine}')`;

@@ -1,3 +1,19 @@
+<script type="text/javascript">
+  function checkFile() {
+      var fileElement = document.getElementById("uploadFile");
+      var fileExtension = "";
+      if (fileElement.value.lastIndexOf(".") > 0) {
+          fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
+      }
+      if (fileExtension.toLowerCase() == "gif") {
+          return true;
+      }
+      else {
+          alert("You must select a GIF file for upload");
+          return false;
+      }
+  }
+</script>
 <div class="card">
     <div class="card-body">
         <form [formGroup]="productForm" (ngSubmit)="onSubmit()">  
@@ -24,18 +40,19 @@
                 </div>  
                  </div>
 
-                   
-                    <label for="product_category"class="col-md-4"> Product Catagory</label>  
+                 
+                 <label for="product_category"class="col-md-4"> Product Catagory</label>  
 
-                    <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)" value="Chair" #product_category>
-                    <label for="chair">Chair</label><br>
-                    <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)"  value="Bed" #product_category />  
-                    <label for="bed">Bed</label><br>
-                    <input type="radio" formControlName="product_category"(change)="ChangeCategory($event)" value="Sofa" #product_category />  
-                    <label for="sofa">Sofa</label><br>
-                    
-                    
-                    
+                 <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)" value="Chair" #product_category>
+                 <label for="chair">Chair</label><br>
+                 <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)"  value="Bed" #product_category />  
+                 <label for="bed">Bed</label><br>
+                 <input type="radio" formControlName="product_category"(change)="ChangeCategory($event)" value="Sofa" #product_category />  
+                 <label for="sofa">Sofa</label><br>
+
+               
+                   
+                                      
                    
                   <div *ngIf="productForm.controls['product_category'].invalid && (productForm.controls['product_category'].dirty || productForm.controls['product_category'].touched)"  class="alert-danger">
                     <div *ngIf="productForm.controls['product_category'].errors.required">  
@@ -65,12 +82,15 @@
 
                   <div class="form-group">
                     <label class="col-md-4">Product Image</label>
-                    <input type="file" class="form-control-file" formControlName="product_image_mine" #product_image_mine >
+                    <input type="file" class="form-control-file" formControlName="product_image_mine" (change)="onSelectFile($event)" #product_image_mine ><br/>
+                    <small>*jpeg, *png, *jpg files are allowed</small>
+                    <img [src]="url" height="200"> <br/>
                   </div>
                   <div *ngIf="productForm.controls['product_image_mine'].invalid && (productForm.controls['product_image_mine'].dirty || productForm.controls['product_image_mine'].touched)"  class="alert-danger">
                     <div *ngIf="productForm.controls['product_image_mine'].errors.required">  
                       Product Image is required.  
                     </div>  
+  
                   </div>
                   <div class="form-group">  
                     <button type="submit" class="btn btn-outline-primary"  [disabled]="productForm.pristine || productForm.invalid" (click)=" addProduct(product_name.value,product_description.value,product_category.value,product_units_in_stock.value,product_price.value,product_image_mine.value)">Submit</button> 

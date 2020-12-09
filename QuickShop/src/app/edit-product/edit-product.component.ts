@@ -23,19 +23,14 @@ export class EditProductComponent {
     product_price:['',Validators.required],
     product_image_mine:['',Validators.required]
    });
+   
    UpdateProduct(id,product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine){
     this.route.params.subscribe(params => {  
       this.ps.UpdateProduct(params.id,product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine)
-      this.router.navigate(['/admin']);  
+       
     });  
    }
-   ngOnInit() {  
-    this.route.params.subscribe(params => {  
-        this.ps.editProduct(params['id']).subscribe(res => {  
-          this.product = res;  
-      });  
-    });  
-  }
+  
   ChangeCategory(e){
    
     this.editproductForm.get('product_category').setValue(e.target.value,{onlySelf:true})
@@ -49,6 +44,12 @@ export class EditProductComponent {
   
   onSubmit(){
     this.isSubmitted=true;
+
+    this.route.params.subscribe(params => {  
+      this.ps.editProduct(params['id']).subscribe(res => {  
+        this.product = res;  
+    });  
+  }); 
       alert('Product Updated');
     
   

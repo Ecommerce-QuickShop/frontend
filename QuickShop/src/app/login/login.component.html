@@ -1,2 +1,35 @@
-<p>login works!</p>
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+        <h2>Login</h2>
+  
+              
+        <div class="form-group">
+          <label class="col-md-4">Email</label>
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter Email"#email />
+        </div>
+        <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert-danger">
+          <div *ngIf="loginForm.controls['email'].errors.required">
+            Email is required.
+          </div>
+        </div>
+  
+  
+        <div class="form-group">
+          <label class="col-md-4">Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Enter Password" #password  />
+          <small>Password must be at least 8 characters</small>
+        </div>
+        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"  class="alert-danger">
+          <div *ngIf="loginForm.controls['password'].errors.required">
+            Password is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-primary" routerLink='/' [disabled]="loginForm.pristine || loginForm.invalid" >Login <i class="fas fa-sign-in-alt"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
 

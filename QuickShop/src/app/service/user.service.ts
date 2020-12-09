@@ -19,7 +19,7 @@ export class UserService {
       username,
       password,
       role,
-      avatar_mine
+      avatar_mine    
     };
     console.log(obj);
 
