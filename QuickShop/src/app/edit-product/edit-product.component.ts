@@ -12,6 +12,7 @@ export class EditProductComponent {
   isSubmitted=false;
   product: any = {};  
   Category: any=['Chair','Bed','Sofa']
+  url:string | ArrayBuffer
   constructor(private route: ActivatedRoute, private router: Router, private ps: ProductService, private fb: FormBuilder) { }
 
   editproductForm=this.fb.group({
@@ -24,9 +25,9 @@ export class EditProductComponent {
     product_image_mine:['',Validators.required]
    });
    
-   UpdateProduct(id,product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine){
+   UpdateProduct(product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine,id){
     this.route.params.subscribe(params => {  
-      this.ps.UpdateProduct(params.id,product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine)
+      this.ps.UpdateProduct(product_name,product_description,product_category,product_units_in_stock,product_price,product_image_mine,params.id)
        
     });  
    }
@@ -53,6 +54,21 @@ export class EditProductComponent {
       alert('Product Updated');
     
   
+  }
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      console.log(this.editproductForm.get('product_image_mine').value);
+  
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+        
+      }
+       
+    }
+    
   }
   
 }

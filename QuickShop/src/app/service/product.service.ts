@@ -47,8 +47,9 @@ export class ProductService {
     
     console.log(obj);
     this.http.put(`${this.uri}/admin/ProductInventory/UpdateProduct/${id}`,(obj))
+    .subscribe(res=>console.log('Done'));
     }
     editProduct(id){
-      return this.http.put(`${this.uri}/admin/ProductInventory/UpdateProduct/${id}`,this.UpdateProduct);
+      return this.http.get(`${this.uri}/products/${id}`);
     }
   }

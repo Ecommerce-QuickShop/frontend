@@ -2,6 +2,7 @@ var express = require('express');
  // var  path = require('path'); 
    var bodyParser = require('body-parser'); 
 var cors = require('cors'); 
+var multer = require('multer');
    
    var mysql = require('mysql');
    
@@ -41,6 +42,31 @@ mysqlConnection.connect((err)=>{
         console.log('DB could not connect\n Error: '+ JSON.stringify(err,undefined,2));
     }
 });
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, '/Users/godzc/Pictures')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+var upload = multer({storage: storage});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/imageUpload.html');
+});
+
+app.post('/upload', upload.single('Image'), (req, res, next) => {
+    const file = req.file;
+    if (!file) {
+        const error = new Error('Please upload a file');
+        error.httpStatusCode = 400;
+        return next(error);
+    }
+    res.send(file);
+});
+
 
 //Products CRUD
 
@@ -110,7 +136,7 @@ app.get('/products',(req,res)=>{
            }
 
           
-           var UpdateProduct=`UPDATE products SET product_name='${Product.product_name}', product_description='${Product.product_description}', product_category='${Product.product_category}', product_units_in_stock='${Product.product_units_in_stock}', product_price= '${Product.product_price}', product_image_mine='${Product.product_image_mine}'`;
+           var UpdateProduct=`UPDATE products SET product_name='${Product.product_name}', product_description='${Product.product_description}', product_category='${Product.product_category}', product_units_in_stock='${Product.product_units_in_stock}', product_price= '${Product.product_price}', product_image_mine='${Product.product_image_mine}' WHERE product_id='${req.params.id}'`;
            mysqlConnection.query(UpdateProduct,(err)=>{
             if(!err){
                
@@ -212,7 +238,7 @@ app.get('/UserProfile/:id',(req,res)=>{
         avatar_mine:req.body.avatar_mine,
     }
      
-    var UpdateUser=`UPDATE user SET first_name='${User.first_name}',last_name='${User.last_name}' email='${User.email}', phone_number='${User.phone_number}', username='${User.username}', password= '${User.password}', role='${User.role}',avatar_mine='${User.avatar_mine}'`;
+    var UpdateUser=`UPDATE user SET first_name='${User.first_name}',last_name='${User.last_name}' email='${User.email}', phone_number='${User.phone_number}', username='${User.username}', password= '${User.password}', role='${User.role}',avatar_mine='${User.avatar_mine}' WHERE user_id='${req.params.id}'`;
     mysqlConnection.query(UpdateUser,(err)=>{
      if(!err){
         
