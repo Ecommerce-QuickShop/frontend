@@ -23,4 +23,4 @@ Angualar frontend, Express backend to create CRUD REST APIs that connects to a M
 
 Run Express app using the command, npm start or npm run dev (keeps track of changes made within server)
 Run Angular app using the command, ng serve or ng serve -o (automatically opens the browser)
-Application runs on http:://localhost:8080
+Application runs on http:://localhost:4200
