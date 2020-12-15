@@ -65,10 +65,13 @@
                   </div>
 
                   <div class="form-group">
+                    <form [formGroup]="productForm">
                     <label class="col-md-4">Product Image</label>
-                    <input type="file" class="form-control-file" accept="image/*" formControlName="product_image_mine" (change)="onSelectFile($event)" #product_image_mine ><br/>
+                    <input type="file" class="form-control-file" accept="image/*" formControlName="product_image_mine" (change)="onSelectFile($event)"  #product_image_mine><br/>
 
                     <img [src]="url" height="200"> <br/>
+                    <button type="submit" (click)="Upload()"  >Upload</button>
+                    </form>
                   </div>
                   <div *ngIf="productForm.controls['product_image_mine'].invalid && (productForm.controls['product_image_mine'].dirty || productForm.controls['product_image_mine'].touched)"  class="alert-danger">
                     <div *ngIf="productForm.controls['product_image_mine'].errors.required">  

@@ -1,8 +1,9 @@
 var express = require('express'); 
- // var  path = require('path'); 
-   var bodyParser = require('body-parser'); 
+ var bodyParser = require('body-parser'); 
 var cors = require('cors'); 
 var multer = require('multer');
+const path = require('path');
+
    
    var mysql = require('mysql');
    
@@ -10,6 +11,8 @@ var multer = require('multer');
     const host='localhost'; 
 
     app = express(); 
+    
+
 
   
     app.use(bodyParser.json()); 
@@ -17,6 +20,7 @@ var multer = require('multer');
    
       // Handle form data
 app.use(express.urlencoded({extended:false}));
+app.use(express.static('images'));
   
 
 const mysqlConnection=mysql.createConnection({
@@ -44,14 +48,31 @@ mysqlConnection.connect((err)=>{
 });
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, '/Users/godzc/Pictures')
+        cb(null, './images')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
 })
 
-var upload = multer({storage: storage});
+var upload = multer({storage: storage, fileFilter:function(req,file,cb){checkFileType(file,cb);}});
+
+ // Check File Type
+function checkFileType(file, cb){
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|gif/;
+    // Check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+  
+    if(mimetype && extname){
+      return cb(null,true);
+    } else {
+      cb('Error: Images Only!');
+    }
+  }
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/imageUpload.html');
@@ -59,12 +80,17 @@ app.get('/', (req, res) => {
 
 app.post('/upload', upload.single('Image'), (req, res, next) => {
     const file = req.file;
+    console.log(file.filename);
     if (!file) {
-        const error = new Error('Please upload a file');
-        error.httpStatusCode = 400;
-        return next(error);
+      const error=new Error("Please upload a file");
+      error.httpStatusCode=400
+      return next(error);       
     }
-    res.send(file);
+  
+res.send({
+    msg:'File Uploaded',
+    url:`images/${req.file.filename}`
+});
 });
 
 
@@ -98,6 +124,7 @@ app.get('/products',(req,res)=>{
     });
     // Create a product
        app.post('/admin/ProductInventory/AddProduct',(req,res)=>{
+        
            var Product={
             
                  product_name:req.body.product_name,
@@ -132,7 +159,7 @@ app.get('/products',(req,res)=>{
             product_category:req.body.product_category,
             product_units_in_stock:req.body.product_units_in_stock,
             product_price:req.body.product_price,
-            product_image_mine:req.body.product_image_mine,
+            product_image_mine:req.file.product_image_mine,
            }
 
           

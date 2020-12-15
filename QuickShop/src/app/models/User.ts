@@ -7,7 +7,7 @@ export class User{
     username:string;
     password:string;
     role:String;
-    avatar_mine:string | ArrayBuffer;
+    avatar_mine:string;
         
     }
     

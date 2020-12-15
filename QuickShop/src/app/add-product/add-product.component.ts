@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms'; 
 import { ProductService } from '../service/product.service';
-
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -16,7 +16,7 @@ export class AddProductComponent {
   url:string | ArrayBuffer
   Category:any=['Chair',  'Bed', 'Sofa']
 
-  constructor(private fb: FormBuilder, private ps:ProductService) { }
+  constructor(private fb: FormBuilder, private ps:ProductService, private http: HttpClient) { }
 
  productForm=this.fb.group({
 
@@ -51,18 +51,37 @@ get ProductCategory(){
 }
 onSelectFile(event) {
   if (event.target.files && event.target.files[0]) {
+    const file=event.target.files[0];
     var reader = new FileReader();
 
-    reader.readAsDataURL(event.target.files[0]); // read file as data url
-    console.log(this.productForm.get('product_image_mine').value);
-
+  
+    reader.readAsDataURL(file); // read file as data url
+    console.log(file.name);
+  
     reader.onload = (event) => { // called once readAsDataURL is completed
       this.url = event.target.result;
+      this.productForm.get('product_image_mine').setValue(file);
       
     }
      
+  
+ 
+  
+   
+    
+    //console.log(this.productForm.get('product_image_mine').value);
   }
+
+  
   
 }
+Upload(){
+  const  formData=new FormData();
 
+formData.append('Image',this.productForm.get('product_image_mine').value);
+ 
+  this.http.post<any>('http://localhost:8080/upload',formData).subscribe((res)=>console.log(res),(err)=>console.log(err));
 }
+}
+
+

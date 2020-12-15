@@ -2,13 +2,23 @@
     <h2>QuickShop</h2>
   <button mat-button routerLink='/'>Home</button>
   <button mat-button routerLink='/contact'>Contact</button>
-   <button mat-button routerLink='/adminManagement'>Products/Profile</button>
+  <div class="dropdown">
+   <button mat-button routerLink='/adminManagement'>Products/Profile
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+    <a href="#">Admin</a>
+    <a routerLink='/AddProduct'>Add Product</a>
+    <a routerLink='/ShowProducts'>Product Inventory</a>
+    <a routerLink='/ShowUsers'>User Management</a>
+  </div>
+  </div>
+
+
     <button mat-button routerLink='/'>Logout</button>
   
   </mat-toolbar>
   <router-outlet></router-outlet>
 
 
-  <button routerLink='/AddProduct'>Add Product</button>
-  <button routerLink='/ShowProducts'> Product Inventory</button>
-  <button routerLink='/ShowUsers'> User Management</button>
+  
