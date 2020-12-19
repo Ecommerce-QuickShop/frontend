@@ -1,17 +1,15 @@
-
 <mat-toolbar color="primary">
     <h2>QuickShop</h2>
   <button mat-button routerLink='/'>Home</button>
   <button mat-button routerLink='/contact'>Contact</button>
   <div class="dropdown">
-   <button mat-button routerLink='/adminManagement'>Products/Profile
+   <button mat-button routerLink='/adminManagement'>Shopping
    <i class="fas fa-chevron-down"></i>
   </button>
   <div class="dropdown-content">
-    <a href="#">Admin</a>
-    <a routerLink='/AddProduct'>Add Product</a>
-    <a routerLink='/ShowProducts'>Product Inventory</a>
-    <a routerLink='/ShowUsers'>User Management</a>
+    <a href="#">User</a>
+    <a routerLink='/user/products'>Shop</a>
+    
   </div>
   </div>
   <p>Username<img width="40px" height="40px" style="margin: auto; border-radius: 50%;" src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png"/></p>
@@ -25,4 +23,3 @@
   <router-outlet></router-outlet>
 
 
-  

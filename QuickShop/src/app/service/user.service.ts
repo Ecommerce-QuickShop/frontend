@@ -32,7 +32,10 @@ export class UserService {
 deleteUser(id){
   return this.http.delete(`${this.uri}/admin/UserManagement/DeleteUser/${id}`);
 }
-  
+
+LogInUser(email,password){
+     return this.http.get(`${this.uri}/login/${email}/${password}`)
+  }
 
   
 }

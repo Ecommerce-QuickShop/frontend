@@ -10,6 +10,7 @@ import { ShowProductsComponent } from './show-products/show-products.component';
 import { ShowUsersComponent } from './show-users/show-users.component';
 import { ProductsComponent } from './products/products.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent},
   {path:'admin',component:AdminComponent},
+  {path:'user', component:UserComponent},
   {path:'AddProduct',component:AddProductComponent},
   {path: 'ShowProducts',component:ShowProductsComponent},
   {path:'ShowUsers',component:ShowUsersComponent},

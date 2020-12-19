@@ -24,19 +24,16 @@
                 </div>  
                  </div>
 
-                 
                  <label for="product_category"class="col-md-4"> Product Catagory</label>  
 
-                 <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)" value="Chair" #product_category>
+                 <input type="radio" formControlName="product_category"  (change)="ChangeCategory($event)" value="Chair" #product_category>
                  <label for="chair">Chair</label><br>
-                 <input type="radio" formControlName="product_category" (change)="ChangeCategory($event)"  value="Bed" #product_category />  
+                 <input type="radio" formControlName="product_category"  (change)="ChangeCategory($event)"  value="Bed" #product_category />  
                  <label for="bed">Bed</label><br>
-                 <input type="radio" formControlName="product_category"(change)="ChangeCategory($event)" value="Sofa" #product_category />  
+                 <input type="radio" formControlName="product_category"  (change)="ChangeCategory($event)" value="Sofa" #product_category />  
                  <label for="sofa">Sofa</label><br>
-
                
-                   
-                                      
+                                     
                    
                   <div *ngIf="productForm.controls['product_category'].invalid && (productForm.controls['product_category'].dirty || productForm.controls['product_category'].touched)"  class="alert-danger">
                     <div *ngIf="productForm.controls['product_category'].errors.required">  
@@ -65,12 +62,12 @@
                   </div>
 
                   <div class="form-group">
-                    <form [formGroup]="productForm">
+                    <form [formGroup]="productForm" enctype="multipart/form-data" method="POST">
                     <label class="col-md-4">Product Image</label>
-                    <input type="file" class="form-control-file" accept="image/*" formControlName="product_image_mine" (change)="onSelectFile($event)"  #product_image_mine><br/>
+                    <input type="file" class="form-control-file" name="Image" formControlName="product_image_mine" (change)="onSelectFile($event)"  #product_image_mine><br/>
 
                     <img [src]="url" height="200"> <br/>
-                    <button type="submit" (click)="Upload()"  >Upload</button>
+                    <button type="submit" (click)="Upload()" >Upload</button>
                     </form>
                   </div>
                   <div *ngIf="productForm.controls['product_image_mine'].invalid && (productForm.controls['product_image_mine'].dirty || productForm.controls['product_image_mine'].touched)"  class="alert-danger">

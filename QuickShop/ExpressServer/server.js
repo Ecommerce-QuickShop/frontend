@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
 
 app.post('/upload', upload.single('Image'), (req, res, next) => {
     const file = req.file;
-    console.log(file.filename);
+    console.log(file);
     if (!file) {
       const error=new Error("Please upload a file");
       error.httpStatusCode=400
@@ -293,7 +293,21 @@ app.delete('/admin/UserManagement/DeleteUser/:id',(req,res)=>{
     
         });
        
-       
+     //Get user by Email & Password
+  app.get('/login/:email/:password',(req,res)=>{
+    var UserCredentials=`SELECT * FROM user WHERE email='${req.params.email}' AND password='${req.params.password}'`;
+    
+    mysqlConnection.query(UserCredentials,(err,rows,fields)=>{
+        if(!err){
+           
+           res.send(rows)
+        }
+        else{
+            res.send(err);
+            res.status(400).json({msg: `No user with email ${req.params.email} and password ${req.params.password}`});
+        }
+    });
+    });
      
 
 app.listen(port, host,()=>{  

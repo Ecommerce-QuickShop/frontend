@@ -11,8 +11,8 @@ export class RegisterComponent{
 
   isSubmitted=false;
  
-
-  Role: any =['User','Admin']
+Role: any =['User','Admin']
+  
 
  
   constructor(private fb: FormBuilder, private us:UserService) {}
