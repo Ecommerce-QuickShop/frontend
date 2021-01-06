@@ -37,5 +37,6 @@ LogInUser(email,password){
      return this.http.get(`${this.uri}/login/${email}/${password}`)
   }
 
+
   
 }

@@ -11,7 +11,7 @@ import { ProductService } from '../service/product.service';
 })
 export class EditProductComponent implements OnInit {
   isSubmitted=false;
-  product: any = {};
+
   productDetails:any;
  
 
@@ -50,11 +50,7 @@ export class EditProductComponent implements OnInit {
   onSubmit(){
     this.isSubmitted=true;
 
-    this.route.params.subscribe(params => {  
-      this.ps.editProduct(params['id']).subscribe(res => {  
-        this.product = res;  
-    });  
-  }); 
+ 
       alert('Product Updated');
     
   

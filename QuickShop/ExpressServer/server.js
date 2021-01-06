@@ -294,7 +294,7 @@ app.delete('/admin/UserManagement/DeleteUser/:id',(req,res)=>{
         });
        
      //Get user by Email & Password
-  app.get('/login/:email/:password',(req,res)=>{
+  app.get('/login/:email/:password/',(req,res)=>{
     var UserCredentials=`SELECT * FROM user WHERE email='${req.params.email}' AND password='${req.params.password}'`;
     
     mysqlConnection.query(UserCredentials,(err,rows,fields)=>{
