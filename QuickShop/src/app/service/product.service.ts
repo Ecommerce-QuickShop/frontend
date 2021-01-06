@@ -52,4 +52,7 @@ export class ProductService {
     editProduct(id){
       return this.http.get(`${this.uri}/products/${id}`);
     }
+    GetProductById(id){
+      return this.http.get(`${this.uri}/products/${id}`);
+    }
   }

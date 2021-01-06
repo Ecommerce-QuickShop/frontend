@@ -2,3 +2,18 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.parallax{
+    
+    /* Image used */
+    background-image: url('../ExpressServer/images/store_background.JPG');
+    
+  /* Full height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect*/
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}

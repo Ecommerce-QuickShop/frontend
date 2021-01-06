@@ -1,29 +1,8 @@
-<table class="table table-hover">  
-   
-    <thead>  
-    <tr>  
-        <td><strong>Image</strong></td>  
-        <td><strong>Name</strong></td>  
-        <td><strong>Description</strong></td>  
-        <td><strong>Category</strong></td>  
-        <td><strong>Units in Stock</strong></td>  
-        <td><strong>Price</strong></td>  
-        <td colspan="2"></td>  
-    </tr>  
-    </thead>  
-    <tbody>  
-        <tr *ngFor="let product of products"> 
-                      
-            <td><img src="{{product.product_image_mine }}" style="height: 60%; width: 60%;"/></td>  
-            <td>{{ product.product_name }}</td>  
-            <td>{{ product.product_description }}</td> 
-            <td>{{ product.product_category }}</td>
-            <td>{{ product.product_units_in_stock }}</td>     
-            <td>{{ product.product_price }}</td>  
 
-            <td><a  class="btn btn-success"><i class="fas fa-shopping-cart"></i> Add to Cart</a></td>  
-           
-        </tr>  
-    </tbody>  
-  </table>  
+ <div class="card" *ngFor="let product of products">
+     <img src="https://images.samsung.com/is/image/samsung/levant-uhd-tu8500-ua65tu8500uxtw-frontblack-229856028?$720_576_PNG$" style="width:100%">
+     <h2>{{ product.product_name }}</h2>
+     <p class="price">{{ product.product_price }}</p>
+     <p><button class="btn btn-primary" [routerLink]="['/viewProduct',product.product_id]" >View</button></p>
 
+ </div>

@@ -9,9 +9,12 @@ import { ProductService } from '../service/product.service';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent {
+export class EditProductComponent implements OnInit {
   isSubmitted=false;
-  product: any = {};  
+  product: any = {};
+  productDetails:any;
+ 
+
   Category: any=['Chair','Bed','Sofa']
   url:string | ArrayBuffer
   constructor(private route: ActivatedRoute, private router: Router, private ps: ProductService, private fb: FormBuilder) { }
@@ -71,5 +74,14 @@ export class EditProductComponent {
     }
     
   }
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      this.ps.GetProductById(params['id']).subscribe( product => {
+        console.log(product);
+        this.productDetails = product;
+       });
+   });
+   
   
+}
 }

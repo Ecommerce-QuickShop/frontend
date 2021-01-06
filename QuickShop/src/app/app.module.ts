@@ -27,6 +27,7 @@ import { ProductsComponent } from './products/products.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { NavComponent } from './nav/nav.component';
 import { UserComponent } from './user/user.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
  
 
@@ -46,6 +47,7 @@ import { UserComponent } from './user/user.component';
     EditProductComponent,
     NavComponent,
     UserComponent,
+    ProductDetailsComponent,
     
    
   ],
