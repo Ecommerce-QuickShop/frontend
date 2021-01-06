@@ -12,6 +12,7 @@ import { ProductsComponent } from './products/products.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path:'ShowUsers',component:ShowUsersComponent},
   {path:'products',component:ProductsComponent},
   {path:'editProduct/:id',component:EditProductComponent},
-  {path:'viewProduct/:id',component:ProductDetailsComponent}
+  {path:'viewProduct/:id',component:ProductDetailsComponent},
+  {path:'shoppingCart',component:ShoppingcartComponent}
 
  
 ];

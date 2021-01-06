@@ -308,6 +308,59 @@ app.delete('/admin/UserManagement/DeleteUser/:id',(req,res)=>{
         }
     });
     });
+
+//Adding to shopping Cart
+app.post('/addtoCart',(req,res)=>{
+
+    var CartItem={
+ 
+     item_name:req.body.item_name,
+     item_price:req.body.item_price,
+     item_quantity:req.body.item_quantity,
+     user_id:req.body.user_id,
+     
+     }
+ var ShoppingCartItem=`INSERT INTO cart (item_name,item_price,item_quantity,user_id) VALUES
+  ('${CartItem.item_name}','${CartItem.item_price}','${CartItem.item_quantity}','${CartItem.user_id}')`;
+ mysqlConnection.query(ShoppingCartItem,(err,result,fields)=>{
+     if(!err){
+        
+         res.send("Item added to cart!");
+     }
+     else{
+         res.status(400).json({msg: 'error with adding to cart'});
+     }
+ });
+});
+
+//Get shopping cart
+app.get('/shoppingcart',(req,res)=>{
+    var selectStatement= 'SELECT * FROM cart';
+    mysqlConnection.query(selectStatement,(err,rows)=>{
+        if(!err){
+            res.send(rows);
+        }
+        else{
+            res.status(400).json({msg: 'No shopping cart items in database'});
+        }
+    });
+});
+//Delete all items in shopping cart
+app.delete('/clearcart',(req,res)=>{
+        
+    var deletStatement=`DELETE * FROM cart`;
+    mysqlConnection.query(deletStatement,(err)=>{
+        if(!err){
+           
+            res.send("cart is empty");
+        }
+        else{
+            res.status(400).json({msg: 'error with delete'});
+        }
+    });
+
+});
+
      
 
 app.listen(port, host,()=>{  

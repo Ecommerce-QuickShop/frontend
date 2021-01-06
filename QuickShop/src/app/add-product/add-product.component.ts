@@ -15,6 +15,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class AddProductComponent {
 
   isSubmitted=false;
+  Trusted;
   url:string | ArrayBuffer
   Category: any=['Chair', 'Sofa', 'Bed'];
  
@@ -74,32 +75,28 @@ onSelectFile(event) {
     
   
     reader.readAsDataURL(file); // read file as data url
-    console.log(file);
+   
   
     reader.onload = () => { // called once readAsDataURL is completed
     
     this.url = reader.result;
     //console.log(this.url);
-    let Trusted =this.domsanitizer.bypassSecurityTrustResourceUrl(this.productForm.get('product_image_mine').value);
-    console.log(Trusted);
+    
+     this.Trusted =this.domsanitizer.bypassSecurityTrustResourceUrl('/ExpressServer/images/'+filename);
+    console.log(this.Trusted);
+
+    //console.log(this.productForm.get('product_image_mine').setValue(this.Trusted));
+  console.log(this.productForm.get('product_image_mine').value)
     
       this.productForm.get('product_image_mine').setValue(file);
 
-   
-      
+         
     }
      
-  
- 
-  
-   
-    
-   
-  }
+   }
   }
 
-  
-  
+   
 }
 Upload(){
   const  formData=new FormData();
@@ -107,6 +104,8 @@ Upload(){
 formData.append('Image',this.productForm.get('product_image_mine').value);
  
   this.http.post<any>('http://localhost:8080/upload',formData).subscribe((res)=>console.log(res),(err)=>console.log(err));
+  
+
 }
 }
 

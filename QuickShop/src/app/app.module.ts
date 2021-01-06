@@ -28,6 +28,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { NavComponent } from './nav/nav.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
  
 
@@ -48,6 +49,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     NavComponent,
     UserComponent,
     ProductDetailsComponent,
+    ShoppingcartComponent,
     
    
   ],
