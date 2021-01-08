@@ -14,6 +14,9 @@ export class CartService {
   DeleteCart(){
     return this.http.delete(`${this.uri}/clearcart`);
   }
+  deleteItem(id){
+    return this.http.delete(`${this.uri}/admin/UserManagement/DeleteProduct/${id}`);
+  }
   
   AddToCart(item_name,item_price,item_quantity,user_id){
     const obj={

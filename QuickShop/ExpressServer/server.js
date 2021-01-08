@@ -348,7 +348,7 @@ app.get('/shoppingcart',(req,res)=>{
 //Delete all items in shopping cart
 app.delete('/clearcart',(req,res)=>{
         
-    var deletStatement=`DELETE * FROM cart`;
+    var deletStatement=`DELETE FROM cart`;
     mysqlConnection.query(deletStatement,(err)=>{
         if(!err){
            
@@ -360,6 +360,22 @@ app.delete('/clearcart',(req,res)=>{
     });
 
 });
+//Delete a shopping cart item
+app.delete('shoppingcart/:id',(req,res)=>{
+        
+    var deletStatement=`DELETE FROM cart WHERE cart_id='${req.params.id}'`;
+    mysqlConnection.query(deletStatement,(err)=>{
+        if(!err){
+           
+            res.send("item from shopping cart has been deleted");
+        }
+        else{
+            res.status(400).json({msg: 'error with delete'});
+        }
+    });
+
+});
+
 
      
 

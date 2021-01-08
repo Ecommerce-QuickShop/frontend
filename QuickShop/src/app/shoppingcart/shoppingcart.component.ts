@@ -14,5 +14,11 @@ cartitems:Cart[];
   ngOnInit(): void {
     this.cs.getShoppingCartItems().subscribe((data:Cart[])=>{this.cartitems=data});
   }
+  DeleteCart(){
+    this.cs.DeleteCart().subscribe((data:Cart[])=>{this.cartitems=data});
+  }
+  deleteItem(id){
+    this.cs.deleteItem(id).subscribe(res=>{this.cartitems.splice(id,1)});
+  }
 
 }
